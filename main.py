@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from window import Ui_MainWindow
+from window import Ui_MainWindow, Ui_Form_Home, Ui_Form_Notifications, Ui_Form_Search, Ui_Form_Settings
 
 class Company:
 	def __init__ (self, name, link, color):
@@ -34,11 +34,59 @@ class Company_List:
 	def remove_company (self, index):
 		self.company_list.pop(index)
 	
-class Window (QtWidgets.QMainWindow):
+class Window (QtWidgets.QMainWindow, Ui_MainWindow):
 	def __init__ (self):
-		super(Window, self).__init__()
-		self.ui = Ui_MainWindow()
-		self.ui.setupUi(self)
+		super().__init__()
+		self.setupUi(self)
+		
+		self.Home.clicked.connect( self.changeSceneToHome )
+		self.Notifications.clicked.connect( self.changeSceneToNotifications )
+		self.Search.clicked.connect( self.changeSceneToSearch )
+		self.Settings.clicked.connect( self.changeSceneToSettings )
+		
+	def clearScene( self ):
+		for i in reversed(range(self.MainMenuLayout.count())): 
+			self.MainMenuLayout.itemAt(i).widget().setParent(None)
+
+	def changeSceneToHome( self ):
+		self.clearScene()
+		self.changeModeToHome()
+		self.MainMenuLayout.addWidget( Home() )
+
+	def changeSceneToNotifications( self ):
+		self.clearScene()
+		self.changeModeToNotifications()
+		self.MainMenuLayout.addWidget( Notifications() )
+		
+	def changeSceneToSearch( self ):
+		self.clearScene()
+		self.changeModeToSearch()
+		self.MainMenuLayout.addWidget( Search() )
+
+	def changeSceneToSettings( self ):
+		self.clearScene()
+		self.changeModeToSettings()
+		self.MainMenuLayout.addWidget( Settings() )
+
+class Home(QtWidgets.QWidget, Ui_Form_Home):
+	def __init__(self):
+		super().__init__()
+		self.setupUi(self)
+
+class Notifications(QtWidgets.QWidget, Ui_Form_Notifications):
+	def __init__(self):
+		super().__init__()
+		self.setupUi(self)
+		
+class Search(QtWidgets.QWidget, Ui_Form_Search):
+	def __init__(self):
+		super().__init__()
+		self.setupUi(self)
+
+class Settings(QtWidgets.QWidget, Ui_Form_Settings):
+	def __init__(self):
+		super().__init__()
+		self.setupUi(self)
 
 def main():
 	app = QtWidgets.QApplication ([])
