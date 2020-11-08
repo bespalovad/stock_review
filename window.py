@@ -847,22 +847,6 @@ class Ui_MainWindow(object):
 		self.pushButton_2.setText(_translate("MainWindow", "PushButton"))
 		self.pushButton_3.setText(_translate("MainWindow", "PushButton"))
 		self.label_12.setText(_translate("MainWindow", "Footer"))
-        
-	def changeModeToHome (self):
-		self.mode = "home"
-		return 0
-		
-	def changeModeToNotifications (self):
-		self.mode = "notifications"
-		return 0
-	
-	def changeModeToSearch (self):
-		self.mode = "search"
-		return 0
-	
-	def changeModeToSettings (self):
-		self.mode = "settings"
-		return 0
 
 if __name__ == "__main__":
     import sys
